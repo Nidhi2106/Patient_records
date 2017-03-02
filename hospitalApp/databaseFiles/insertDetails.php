@@ -10,11 +10,15 @@ $age = mysqli_real_escape_string($con, $data->age);
 $dob = mysqli_real_escape_string($con, $data->dob);
 $gender = mysqli_real_escape_string($con, $data->gender);
 $phone = mysqli_real_escape_string($con, $data->phone);
-$freetext = mysqli_real_escape_string($con, $data->free_text);
+if (isset($data->free_text)){
+$free_text = mysqli_real_escape_string($con, $data->free_text);
+} else {
+	$free_text = '';
+}
 //
 // mysqli insert query
 $query = "INSERT into patient (firstname, lastname, age, dob, gender, phone,free_text)" .
-			"VALUES ('$firstname','$lastname', $age, '$dob', '$gender',$phone, '$freetext')";
+			"VALUES ('$firstname','$lastname', $age, '$dob', '$gender',$phone, '$free_text')";
 // Inserting data into database
 mysqli_query($con, $query);
 echo true;
